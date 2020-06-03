@@ -14,7 +14,7 @@ maintainer practices.
 
 Version:	2.9
 Name:		%{pkg_name}%{version}-%{pkg_cmp_name}%{pkg_cmp_ver}
-Release:	0%{?dist}
+Release:	1%{?dist}
 Summary:	%{pkg_summ}
 
 License:	GPL
@@ -82,3 +82,8 @@ install -m 0644 %{version}.lua %{buildroot}%{_moddir}
 
 
 %changelog
+* Wed Jun 03 2020 Diego Menéndez <dmenendez@psu.edu> - 2.9-1
+- Enable simultaneous installation of multiple versions built with different
+  compilers or compiler versions.
+- Add optional modulefile subpackage dependent on main package to avoid leaving
+  an orphaned environment module upon uninstalling main package.
