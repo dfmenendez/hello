@@ -1,11 +1,15 @@
-Name:		hello
+%global pkg_name	hello
+%global pkg_cmp_name	%{getenv:LMOD_FAMILY_COMPILER}
+%global pkg_cmp_ver	%(basename `echo %{getenv:MODULEPATH} | sed -e 's/:/\\n/g' | grep Compiler`)
+
 Version:	2.9
+Name:		%{pkg_name}%{version}-%{pkg_cmp_name}%{pkg_cmp_ver}
 Release:	0%{?dist}
 Summary:	The GNU Hello World program
 
 License:	GPL
 URL:		https://www.gnu.org/software/hello
-Source0:	http://ftp.gnu.org/gnu/hello/%{name}-%{version}.tar.gz
+Source0:	http://ftp.gnu.org/gnu/hello/%{pkg_name}-%{version}.tar.gz
 
 #BuildRequires:
 #Requires:
@@ -22,7 +26,7 @@ that do these things; it serves as a model for GNU coding standards and GNU
 maintainer practices.
 
 %global _basedir	/opt/packages
-%global _prefix		%{_basedir}/%{name}/%{version}
+%global _prefix		%{_basedir}/%{pkg_name}/%{version}_%{pkg_cmp_name}-%{pkg_cmp_ver}
 # On RHEL6 redefine _mandir and _infodir based on GNU Coding Standards (GCS)
 %global _datarootdir	%{_prefix}/share
 %global _infodir	%{_datarootdir}/info
@@ -30,18 +34,16 @@ maintainer practices.
 
 
 %prep
-tar xzf %{SOURCE0}
+%setup -q -n %{pkg_name}-%{version}
 
 
 %build
-cd %{name}-%{version}
-./configure --prefix=%{_prefix}
+%configure
 make %{?_smp_mflags}
 
 
 %install
-cd %{name}-%{version}
-make install DESTDIR=%{buildroot}
+%make_install
 
 
 %files
