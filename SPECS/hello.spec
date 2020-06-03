@@ -12,9 +12,9 @@ The primary purpose of GNU Hello is to demonstrate how to write other programs\
 that do these things; it serves as a model for GNU coding standards and GNU\
 maintainer practices.
 
-Version:	2.9
+Version:	2.10
 Name:		%{pkg_name}%{version}-%{pkg_cmp_name}%{pkg_cmp_ver}
-Release:	1%{?dist}
+Release:	0%{?dist}
 Summary:	%{pkg_summ}
 
 License:	GPL
