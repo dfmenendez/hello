@@ -1,0 +1,24 @@
+-- -*- lua -*-
+------------------------------------------------------------------------
+-- %{pkg_name} %{version}
+------------------------------------------------------------------------
+
+
+help([[
+%{pkg_desc}
+]])
+
+
+-- Whatis description
+whatis('Description: %{summary}')
+whatis('URL: %{url}')
+
+
+-- Local variable
+local prefix = '%{_prefix}'
+
+
+-- Environment variables
+prepend_path('PATH', pathJoin(prefix, 'bin'))
+prepend_path('INFOPATH', pathJoin(prefix, 'share', 'info'))
+prepend_path('MANPATH', pathJoin(prefix, 'share', 'man'))
