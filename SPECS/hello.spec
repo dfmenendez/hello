@@ -13,6 +13,7 @@ Source0:	http://ftp.gnu.org/gnu/hello/%{pkg_name}-%{version}.tar.gz
 
 #BuildRequires:
 #Requires:
+Provides:	%{pkg_name} = %{version}
 
 %description
 The GNU Hello program produces a familiar, friendly greeting. Yes, this is
