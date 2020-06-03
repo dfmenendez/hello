@@ -1,6 +1,7 @@
 %global pkg_name	hello
 %global pkg_cmp_name	%{getenv:LMOD_FAMILY_COMPILER}
 %global pkg_cmp_ver	%(basename `echo %{getenv:MODULEPATH} | sed -e 's/:/\\n/g' | grep Compiler`)
+%global pkg_summ	The GNU Hello World program
 %global pkg_desc	The GNU Hello program produces a familiar, friendly greeting. Yes, this is\
 another implementation of the classic program that prints "Hello, world!" when\
 you run it.\
@@ -14,7 +15,7 @@ maintainer practices.
 Version:	2.9
 Name:		%{pkg_name}%{version}-%{pkg_cmp_name}%{pkg_cmp_ver}
 Release:	0%{?dist}
-Summary:	The GNU Hello World program
+Summary:	%{pkg_summ}
 
 License:	GPL
 URL:		https://www.gnu.org/software/hello
@@ -27,6 +28,15 @@ Provides:	%{pkg_name} = %{version}
 
 %description
 %{pkg_desc}
+
+# Preamble for Lua modulefile (Lmod) subpackage
+%package lmod
+Summary:        %{pkg_name}/%{version} modulefile
+Requires:	%{name}
+BuildArch:	noarch
+
+%description lmod
+This package contains the %{pkg_name}/%{version} modulefile.
 
 %global _basedir	/opt/packages
 %global _prefix		%{_basedir}/%{pkg_name}/%{version}_%{pkg_cmp_name}-%{pkg_cmp_ver}
@@ -66,6 +76,7 @@ install -m 0644 %{version}.lua %{buildroot}%{_moddir}
 %docdir %{_mandir}
 
 # Manifest for Lua module file
+%files lmod
 %{_moddir}/%{version}.lua
 
 

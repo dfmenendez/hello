@@ -10,7 +10,7 @@ help([[
 
 
 -- Whatis description
-whatis('Description: %{summary}')
+whatis('Description: %{pkg_summ}')
 whatis('URL: %{url}')
 
 
